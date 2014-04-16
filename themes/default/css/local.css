@@ -69,3 +69,59 @@ div.bundleDisplayEditorPlacementList div.bundleDisplayEditorPlacement {
 .cke_reset.cke_maximized {
 	z-index: 30001 !important;
 }
+
+
+div.notification-info-box,
+div.notification-error-box,
+div.notification-warning-box {
+	width: 100%;
+}
+
+#tooltip h3, #tooltip div { margin: 0; }
+
+#tooltip.tooltipFormat {
+	font-family: Arial;
+	border: none;
+	width: 210px;
+	padding:15px;
+	/*height: 135px;
+	opacity: 0.8;
+	background: url('../graphics/backgrounds/tooltip_box.png');*/
+	-moz-border-radius: 10px;
+	-webkit-border-top: 10px;
+	border-radius: 10px;
+	-moz-box-shadow: 2px 2px 5px #adadad;
+	-webkit-box-shadow: 2px 2px 5px #adadad;
+	box-shadow: 2px 2px 5px #adadad;
+	background-color:#FFFFFF;
+	color:#000000;
+	font-size:11px;
+	border:1px solid #adadad;
+}
+#tooltip.tooltipFormat h3 {
+	margin-bottom: 0.25em;
+	font-size: 10pt;
+	width: 220px;
+	text-align: center;
+}
+#tooltip.tooltipFormat div {
+	/*width: 205px;
+	height: 130px;
+	text-align: left;
+	overflow: hidden;*/
+	margin: 0px;
+}
+
+#tooltip.resizeableTooltip {
+	font-family: Arial;
+	border: none;
+	padding:3px;
+	opacity: 1.0;
+}
+
+#tooltip.resizeableTooltip h3 {
+	margin-bottom: 0.25em;
+	font-size: 10pt;
+	text-align: center;
+	opacity: 1.0;
+}
