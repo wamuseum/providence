@@ -17,3 +17,4 @@ scratch/
 /import/*
 app/lib/core/Parsers/htmlpurifier/standalone/HTMLPurifier/DefinitionCache/Serializer/*
 .idea/
+app/log/log*.txt
