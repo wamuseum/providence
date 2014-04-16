@@ -76,15 +76,6 @@ class WLPlugGeographicMapOpenLayers Extends BaseGeographicMapPlugIn Implements I
 		list($vs_width, $vs_height) = $this->getDimensions();
 		list($vn_width, $vn_height) = $this->getDimensions(array('returnPixelValues' => true));
 		
-		if (!preg_match('!^[\d]+%$!', $vn_width)) {
-			$vn_width = intval($vn_width)."px";
-			if ($vn_width < 1) { $vn_width = 690; }
-		}
-		if (!preg_match('!^[\d]+%$!', $vn_height)) {
-			$vn_height = intval($vn_height)."px";
-			if ($vn_height < 1) { $vn_height = 300; }
-		}
-		
 		$va_options = caGetOptions($pa_options, array());
 		
 		$va_map_items = $this->getMapItems();
@@ -277,7 +268,7 @@ class WLPlugGeographicMapOpenLayers Extends BaseGeographicMapPlugIn Implements I
 				selectedFeature_{$vs_id} = feature;
 				
 				if (!popup_{$vs_id}) {
-					popup_{$vs_id} = new OpenLayers.Popup.Anchored('infoBubble',
+					popup_{$vs_id} = new OpenLayers.Popup.Anchored('infoBubble', 
 						 feature.geometry.getBounds().getCenterLonLat(),
 						 null,
 						 feature.data.label + feature.data.content,
