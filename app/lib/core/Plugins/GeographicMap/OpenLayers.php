@@ -72,7 +72,7 @@ class WLPlugGeographicMapOpenLayers Extends BaseGeographicMapPlugIn Implements I
 	 */
 	public function render($ps_format, $pa_options=null) {
 		$o_config = Configuration::load();
-
+		
 		list($vs_width, $vs_height) = $this->getDimensions();
 		list($vn_width, $vn_height) = $this->getDimensions(array('returnPixelValues' => true));
 		
@@ -268,7 +268,7 @@ class WLPlugGeographicMapOpenLayers Extends BaseGeographicMapPlugIn Implements I
 				selectedFeature_{$vs_id} = feature;
 				
 				if (!popup_{$vs_id}) {
-					popup_{$vs_id} = new OpenLayers.Popup.Anchored('infoBubble', 
+					popup_{$vs_id} = new OpenLayers.Popup.Anchored('infoBubble',
 						 feature.geometry.getBounds().getCenterLonLat(),
 						 null,
 						 feature.data.label + feature.data.content,
