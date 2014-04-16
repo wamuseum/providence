@@ -112,7 +112,7 @@ h5 {
 
 #logo {
     background-repeat: no-repeat;
-	width: 195px;
+    width: 195px;
     height: 45px;
     float: left;
     cursor: pointer;
@@ -1085,9 +1085,9 @@ a.form-button, span.form-button, del.form-button{
     line-height:0;
 
     /*
-	for Safari, read this first
-	http://creativebits.org/webdev/safari_background_repeat_bug_fix
-	*/
+    for Safari, read this first
+    http://creativebits.org/webdev/safari_background_repeat_bug_fix
+    */
     background-position:0 0;
     background-repeat:no-repeat;
     height:30px;
@@ -1311,8 +1311,8 @@ table.listtable tfoot td {
 
 td.listtableTotals {
     vertical-align: top;
-	font-weight: bold;
-	text-align: right;
+    font-weight: bold;
+    text-align: right;
 }
 
 /* misc */
@@ -1442,10 +1442,10 @@ div.search-hier-browser-box {
     margin-top:5px;
 }
 /* 
-	.labelInfo .form-button{
-	float:right;
-	margin: 0px;
-	padding: 0px;
+    .labelInfo .form-button{
+    float:right;
+    margin: 0px;
+    padding: 0px;
 }
 */
 
@@ -4349,17 +4349,17 @@ div.jGrowl div.jGrowl-closer {
 /* Relationship display */
 
 li.quickaddMenuItem {
-	background-color: #eee;
-	border-top: 2px solid #aaa;
-	margin-top: 15px;
+    background-color: #eee;
+    border-top: 2px solid #aaa;
+    margin-top: 15px;
 }
 
 a.quickaddMenuItem {
-	font-style: italic;
-	-moz-border-radius: 0px; 
-	-webkit-border-radius: 0px; 
-	-khtml-border-radius: 0px; 
-	border-radius: 0px;
+    font-style: italic;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -khtml-border-radius: 0px;
+    border-radius: 0px;
 }
 
 div.roundedRel {
@@ -5371,7 +5371,7 @@ div.dialogHeader {
     font-weight: bold !important;
     padding: 5px;
     margin: 0 8px 3px 8px !important;
-    
+
     -moz-border-radius-: 8px;
     -webkit-border-radius: 8px;
     border-radius: 8px;
@@ -5746,7 +5746,7 @@ div.caRepresentationMediaReplicationControls {
     height: 20px;
 }
 .caAnnoEditorTlSlider {
-	margin: 15px 0 0 0;
+    margin: 15px 0 0 0;
 }
 .caAnnoEditorTlSyncControl {
     position:absolute;
@@ -5757,12 +5757,12 @@ div.caRepresentationMediaReplicationControls {
     margin: 0 10px 0 95px;
 }
 .caAnnoEditorTlAnnotationContainer {
-	position: relative;
+    position: relative;
     margin: 0px 3px 0px 3px;
     border: 2px solid #fff;
     background-color:#fff;
     height: 88px;
-    
+
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -5782,7 +5782,7 @@ div.caRepresentationMediaReplicationControls {
 }
 .caAnnoEditorTlAnnotationContainer div.title a {
     font-size:12px;
-  	text-decoration: none;
+    text-decoration: none;
 }
 .caAnnoEditorTlAnnotationContainer div.timecode a {
     font-size:9px;
@@ -5795,70 +5795,70 @@ div.caRepresentationMediaReplicationControls {
     text-decoration: none;
 }
 .caAnnoEditorTlAnnotationContainer div.editAnnoButton {
-	position: absolute;
-	right: 3px;
-	bottom: 3px;
+    position: absolute;
+    right: 3px;
+    bottom: 3px;
 }
 .caAnnoEditorTlAnnotationContainer div.deleteAnnoButton {
-	position: absolute;
-	right: 3px;
-	top: 3px;
+    position: absolute;
+    right: 3px;
+    top: 3px;
 }
 
 .caAnnoMediaPlayerContainer {	/*  media player container */
-	float: left;
+    float: left;
     width: 500px;
     height: 375px;
-    
-	background-image: url(../graphics/icons/audio.png);
-	background-position: center center;
-	background-repeat:no-repeat;
+
+    background-image: url(../graphics/icons/audio.png);
+    background-position: center center;
+    background-repeat:no-repeat;
     background-color: #000;
 }
 .caAnnoEditorMediaPlayer {
-	width: 500px;
+    width: 500px;
     margin: auto auto 0 auto;
 }
 .caAnnoEditorAudioMediaPlayer {
-	margin-top: 343px;
+    margin-top: 343px;
 }
 .caAnnoEditorVideoMediaPlayer {
 
 }
 .caAnnoMediaPlayerControlsLeft {
-	float: left;
-	padding: 10px;
+    float: left;
+    padding: 10px;
 }
 .caAnnoMediaPlayerControlsRight {
-	float: right;
-	padding: 10px;
+    float: right;
+    padding: 10px;
 }
 
 .caAnnoEditorEditorScreen {
-	float: right;
-	width: 720px;
-	height: 500px;
-	overflow: auto;
-	margin: 0 10px 0 0;
-	background-color: #ededed;
+    float: right;
+    width: 720px;
+    height: 500px;
+    overflow: auto;
+    margin: 0 10px 0 0;
+    background-color: #ededed;
 }
 .caAnnoEditorInfo {
     font-weight: bold;
 }
 .caAnnoEditorTlSliderInfo {
-	display: none;
-	position: absolute; 
-	top: -6px; 
-	left: 15px; 
-	min-width: 60px; 
-	padding: 5px 5px 5px 10px; 
-	font-size:12px;
-	line-height:1em;
-	white-space:nowrap;
-	color:#FFFFFF;
-	background-image: url(../graphics/backgrounds/bgSliderInfo.png);
-	background-position: left center;
-	background-repeat:no-repeat;
+    display: none;
+    position: absolute;
+    top: -6px;
+    left: 15px;
+    min-width: 60px;
+    padding: 5px 5px 5px 10px;
+    font-size:12px;
+    line-height:1em;
+    white-space:nowrap;
+    color:#FFFFFF;
+    background-image: url(../graphics/backgrounds/bgSliderInfo.png);
+    background-position: left center;
+    background-repeat:no-repeat;
 }
 
 
