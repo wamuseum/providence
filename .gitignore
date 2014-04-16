@@ -15,4 +15,3 @@ setup.php
 /import/*
 app/lib/core/Parsers/htmlpurifier/standalone/HTMLPurifier/DefinitionCache/Serializer/*
 app/log/log*.txt
-app/log/log*.txt
