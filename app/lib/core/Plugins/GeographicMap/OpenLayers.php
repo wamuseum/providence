@@ -72,8 +72,9 @@ class WLPlugGeographicMapOpenLayers Extends BaseGeographicMapPlugIn Implements I
 	 */
 	public function render($ps_format, $pa_options=null) {
 		$o_config = Configuration::load();
-		
-		list($vn_width, $vn_height) = $this->getDimensions();
+
+		list($vs_width, $vs_height) = $this->getDimensions();
+		list($vn_width, $vn_height) = $this->getDimensions(array('returnPixelValues' => true));
 		
 		if (!preg_match('!^[\d]+%$!', $vn_width)) {
 			$vn_width = intval($vn_width)."px";
@@ -151,7 +152,7 @@ class WLPlugGeographicMapOpenLayers Extends BaseGeographicMapPlugIn Implements I
 		
 		
 				$va_layers[] = "new {$vs_base_layer}";
-				$vs_buf = "<div style='width:{$vn_width}; height:{$vn_height}' id='{$vs_id}' ".((isset($pa_options['classname']) && $pa_options['classname']) ? "class='".$pa_options['classname']."'" : "")."> </div>\n";
+				$vs_buf = "<div style='width:{$vs_width}; height:{$vs_height}' id='{$vs_id}' ".((isset($pa_options['classname']) && $pa_options['classname']) ? "class='".$pa_options['classname']."'" : "")."> </div>\n";
 				$vs_buf .= "
 <script type='text/javascript'>;
 	jQuery(document).ready(function() {
@@ -276,7 +277,7 @@ class WLPlugGeographicMapOpenLayers Extends BaseGeographicMapPlugIn Implements I
 				selectedFeature_{$vs_id} = feature;
 				
 				if (!popup_{$vs_id}) {
-					popup_{$vs_id} = new OpenLayers.Popup.AnchoredBubble('infoBubble', 
+					popup_{$vs_id} = new OpenLayers.Popup.Anchored('infoBubble',
 						 feature.geometry.getBounds().getCenterLonLat(),
 						 null,
 						 feature.data.label + feature.data.content,
@@ -414,7 +415,7 @@ class WLPlugGeographicMapOpenLayers Extends BaseGeographicMapPlugIn Implements I
 		$vs_layer_switcher_control = caGetOption('layerSwitcherControl', $pa_element_info['settings'], null) ? "map_{$vs_id}.addControl(new OpenLayers.Control.LayerSwitcher());" : "";
 		
 		
-		$vs_element = '<div id="{fieldNamePrefix}mapholder_'.$vs_id.'_{n}" class="mapholder" style="width:'.$vn_width.'spx; height:'.($vn_height + 40).'px; float: left; margin:-18px 0 0 0;">';
+		$vs_element = '<div id="{fieldNamePrefix}mapholder_'.$vs_id.'_{n}" class="mapholder" style="width:'.$vn_width.'px; height:'.($vn_height + 40).'px; float: left; margin:-18px 0 0 0;">';
 
 		$vs_element .= 		'<div class="olMapSearchControls" id="{fieldNamePrefix}Controls_{n}">';
 		if ($po_request) {
