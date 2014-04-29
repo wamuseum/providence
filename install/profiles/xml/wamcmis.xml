@@ -15102,14 +15102,6 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
-        <restriction>
-          <table/>
-          <settings>
-            <setting name="minAttributesPerRow">0</setting>
-            <setting name="maxAttributesPerRow">1</setting>
-            <setting name="minimumAttributeBundlesToDisplay">1</setting>
-          </settings>
-        </restriction>
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="description_source" datatype="Text">
@@ -15830,14 +15822,6 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
-        <restriction>
-          <table/>
-          <settings>
-            <setting name="minAttributesPerRow">0</setting>
-            <setting name="maxAttributesPerRow">1</setting>
-            <setting name="minimumAttributeBundlesToDisplay">1</setting>
-          </settings>
-        </restriction>
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="dcModified" datatype="DateRange">
@@ -15900,14 +15884,6 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
-        <restriction>
-          <table/>
-          <settings>
-            <setting name="minAttributesPerRow">0</setting>
-            <setting name="maxAttributesPerRow">1</setting>
-            <setting name="minimumAttributeBundlesToDisplay">1</setting>
-          </settings>
-        </restriction>
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="dcLanguage" datatype="List" list="languages">
@@ -15961,14 +15937,6 @@
         </restriction>
         <restriction>
           <table>ca_object_lots</table>
-          <settings>
-            <setting name="minAttributesPerRow">0</setting>
-            <setting name="maxAttributesPerRow">1</setting>
-            <setting name="minimumAttributeBundlesToDisplay">1</setting>
-          </settings>
-        </restriction>
-        <restriction>
-          <table/>
           <settings>
             <setting name="minAttributesPerRow">0</setting>
             <setting name="maxAttributesPerRow">1</setting>
@@ -16038,14 +16006,6 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
-        <restriction>
-          <table/>
-          <settings>
-            <setting name="minAttributesPerRow">0</setting>
-            <setting name="maxAttributesPerRow">1</setting>
-            <setting name="minimumAttributeBundlesToDisplay">1</setting>
-          </settings>
-        </restriction>
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="dcBibCitation" datatype="Text">
@@ -16103,14 +16063,6 @@
         </restriction>
         <restriction>
           <table>ca_object_lots</table>
-          <settings>
-            <setting name="minAttributesPerRow">0</setting>
-            <setting name="maxAttributesPerRow">1</setting>
-            <setting name="minimumAttributeBundlesToDisplay">1</setting>
-          </settings>
-        </restriction>
-        <restriction>
-          <table/>
           <settings>
             <setting name="minAttributesPerRow">0</setting>
             <setting name="maxAttributesPerRow">1</setting>
@@ -16179,14 +16131,6 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
-        <restriction>
-          <table/>
-          <settings>
-            <setting name="minAttributesPerRow">0</setting>
-            <setting name="maxAttributesPerRow">1</setting>
-            <setting name="minimumAttributeBundlesToDisplay">1</setting>
-          </settings>
-        </restriction>
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="institutionCode" datatype="Text">
@@ -16246,14 +16190,6 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
-        <restriction>
-          <table/>
-          <settings>
-            <setting name="minAttributesPerRow">0</setting>
-            <setting name="maxAttributesPerRow">1</setting>
-            <setting name="minimumAttributeBundlesToDisplay">1</setting>
-          </settings>
-        </restriction>
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="ownerInstitutionCode" datatype="Text">
@@ -16307,14 +16243,6 @@
         </restriction>
         <restriction>
           <table>ca_object_lots</table>
-          <settings>
-            <setting name="minAttributesPerRow">0</setting>
-            <setting name="maxAttributesPerRow">1</setting>
-            <setting name="minimumAttributeBundlesToDisplay">1</setting>
-          </settings>
-        </restriction>
-        <restriction>
-          <table/>
           <settings>
             <setting name="minAttributesPerRow">0</setting>
             <setting name="maxAttributesPerRow">1</setting>
@@ -16384,14 +16312,6 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
-        <restriction>
-          <table/>
-          <settings>
-            <setting name="minAttributesPerRow">0</setting>
-            <setting name="maxAttributesPerRow">1</setting>
-            <setting name="minimumAttributeBundlesToDisplay">1</setting>
-          </settings>
-        </restriction>
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="dataGeneralizations" datatype="Text">
@@ -16455,14 +16375,6 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
-        <restriction>
-          <table/>
-          <settings>
-            <setting name="minAttributesPerRow">0</setting>
-            <setting name="maxAttributesPerRow">1</setting>
-            <setting name="minimumAttributeBundlesToDisplay">1</setting>
-          </settings>
-        </restriction>
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="dynamicProperties" datatype="Text">
@@ -16519,14 +16431,6 @@
         </restriction>
         <restriction>
           <table>ca_object_lots</table>
-          <settings>
-            <setting name="minAttributesPerRow">0</setting>
-            <setting name="maxAttributesPerRow">1</setting>
-            <setting name="minimumAttributeBundlesToDisplay">1</setting>
-          </settings>
-        </restriction>
-        <restriction>
-          <table/>
           <settings>
             <setting name="minAttributesPerRow">0</setting>
             <setting name="maxAttributesPerRow">1</setting>
@@ -22017,14 +21921,6 @@ Examples: "mm", "C", "km", "ha".</description>
           </bundlePlacements>
         </screen>
       </screens>
-    </userInterface>
-    <userInterface code="places_ui" type="ca_places">
-      <labels>
-        <label locale="en_AU">
-          <name>Place Editor</name>
-        </label>
-      </labels>
-      <screens/>
     </userInterface>
     <userInterface code="scientific_name_editor" type="ca_list_items">
       <labels>
