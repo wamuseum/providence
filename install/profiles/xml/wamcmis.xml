@@ -15102,6 +15102,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+		  <!--
         <restriction>
           <table/>
           <settings>
@@ -15110,6 +15111,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+        -->
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="description_source" datatype="Text">
@@ -15830,6 +15832,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+		  <!--
         <restriction>
           <table/>
           <settings>
@@ -15838,6 +15841,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+        -->
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="dcModified" datatype="DateRange">
@@ -15900,6 +15904,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+		  <!--
         <restriction>
           <table/>
           <settings>
@@ -15908,6 +15913,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+        -->
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="dcLanguage" datatype="List" list="languages">
@@ -15967,6 +15973,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+		  <!--
         <restriction>
           <table/>
           <settings>
@@ -15975,6 +15982,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+        -->
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="dcRights" datatype="Text">
@@ -16038,6 +16046,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+		  <!--
         <restriction>
           <table/>
           <settings>
@@ -16046,6 +16055,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+        -->
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="dcBibCitation" datatype="Text">
@@ -16109,6 +16119,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+		  <!--
         <restriction>
           <table/>
           <settings>
@@ -16117,6 +16128,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+        -->
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="institutionID" datatype="Text">
@@ -16179,6 +16191,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+		  <!--
         <restriction>
           <table/>
           <settings>
@@ -16187,6 +16200,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+        -->
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="institutionCode" datatype="Text">
@@ -16246,6 +16260,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+		  <!--
         <restriction>
           <table/>
           <settings>
@@ -16254,6 +16269,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+        -->
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="ownerInstitutionCode" datatype="Text">
@@ -16313,6 +16329,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+		  <!--
         <restriction>
           <table/>
           <settings>
@@ -16321,6 +16338,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+        -->
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="informationWithheld" datatype="Text">
@@ -16384,6 +16402,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+		  <!--
         <restriction>
           <table/>
           <settings>
@@ -16392,6 +16411,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+        -->
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="dataGeneralizations" datatype="Text">
@@ -16455,6 +16475,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+		  <!--
         <restriction>
           <table/>
           <settings>
@@ -16463,6 +16484,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+        -->
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="dynamicProperties" datatype="Text">
@@ -16525,6 +16547,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+		  <!--
         <restriction>
           <table/>
           <settings>
@@ -16533,6 +16556,7 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
+        -->
       </typeRestrictions>
     </metadataElement>
     <metadataElement code="occurrenceDetails" datatype="Text">
@@ -22018,6 +22042,7 @@ Examples: "mm", "C", "km", "ha".</description>
         </screen>
       </screens>
     </userInterface>
+	  <!--
     <userInterface code="places_ui" type="ca_places">
       <labels>
         <label locale="en_AU">
@@ -22026,6 +22051,7 @@ Examples: "mm", "C", "km", "ha".</description>
       </labels>
       <screens/>
     </userInterface>
+    -->
     <userInterface code="scientific_name_editor" type="ca_list_items">
       <labels>
         <label locale="en_AU">
