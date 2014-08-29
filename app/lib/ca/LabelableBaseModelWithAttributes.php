@@ -848,7 +848,15 @@
 						}
 						
 						$vn_top_id = null;
-						if (!($va_ancestor_list = $this->getHierarchyAncestors(null, array('idsOnly' => true, 'includeSelf' => true)))) {
+
+						$pa_ancestor_options = array('idsOnly' => true, 'includeSelf' => true);
+						if($va_hierarchy_type_restrictions = caGetOption('restrictHierarchyToTypes', $pa_options, array())){
+							if(!is_array($va_hierarchy_type_restrictions)){
+								$va_hierarchy_type_restrictions = array($va_hierarchy_type_restrictions);
+							}
+							$pa_ancestor_options['restrictToTypes'] = $va_hierarchy_type_restrictions;
+						}
+						if (!($va_ancestor_list = $this->getHierarchyAncestors(null, $pa_ancestor_options))) {
 							$va_ancestor_list = array();
 						}
 						
