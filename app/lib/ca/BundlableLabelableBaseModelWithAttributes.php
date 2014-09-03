@@ -267,8 +267,8 @@ class BundlableLabelableBaseModelWithAttributes extends LabelableBaseModelWithAt
 	# ------------------------------------------------------------------
 	/**
 	 * Duplicates record, including labels, attributes and relationships. "Special" bundles - those
-	 * specific to a model - should be duplicated by the model by overriding BundlableLabelablleBaseModelWithAttributes::duplicate()
-	 * and doing any required work after BundlableLabelablleBaseModelWithAttributes::duplicate() has finished
+	 * specific to a model - should be duplicated by the model by overriding BundlableLabelableBaseModelWithAttributes::duplicate()
+	 * and doing any required work after BundlableLabelableBaseModelWithAttributes::duplicate() has finished
 	 * 
 	 * @param array $pa_options
 	 *		duplicate_nonpreferred_labels = if set nonpreferred labels will be duplicated. Default is false.
@@ -276,7 +276,7 @@ class BundlableLabelableBaseModelWithAttributes extends LabelableBaseModelWithAt
 	 *		duplicate_relationships = if set to an array of table names, all relationships to be specified tables will be duplicated. Default is null - no relationships duplicated.
 	 *		user_id = User ID of the user to make owner of the newly duplicated record (for records that support ownership by a user like ca_bundle_displays)
 	 *		
-	 * @return BundlableLabelablleBaseModelWithAttributes instance of newly created duplicate item
+	 * @return BundlableLabelableBaseModelWithAttributes instance of newly created duplicate item
 	 */
 	public function duplicate($pa_options=null) {
 		if (!$this->getPrimaryKey()) { return false; }
@@ -479,11 +479,11 @@ class BundlableLabelableBaseModelWithAttributes extends LabelableBaseModelWithAt
 	 *
 	 * Options:
 	 *		All supported by BaseModelWithAttributes::get() plus:
-	 *		retrictToRelationshipTypes - array of ca_relationship_types.type_id values to filter related items on. *MUST BE INTEGER TYPE_IDs, NOT type_code's* This limitation is for performance reasons. You have to convert codes to integer type_id's before invoking get
+	 *		restrictToRelationshipTypes - array of ca_relationship_types.type_id values to filter related items on. *MUST BE INTEGER TYPE_IDs, NOT type_code's* This limitation is for performance reasons. You have to convert codes to integer type_id's before invoking get
 	 *		sort = optional array of bundles to sort returned values on. Currently only supported when getting related values via simple related <table_name> and <table_name>.related invokations. Eg. from a ca_objects results you can use the 'sort' option got get('ca_entities'), get('ca_entities.related') or get('ca_objects.related'). The bundle specifiers are fields with or without tablename. Only those fields returned for the related tables (intrinsics and label fields) are sortable. You cannot sort on attributes.
-  	 *		returnAsLink = if true and $ps_field is set to a specific field in a related table, or $ps_field is set to a related table (eg. ca_entities or ca_entities.related) AND the template option is set and returnAllLocales is not set, then returned values will be links. The destination of the link will be the appropriate editor when executed within Providence or the appropriate detail page when executed within Pawtucket or another front-end. Default is false.
- 	 *		returnAsLinkText = text to use a content of HTML link. If omitted the url itself is used as the link content.
- 	 *		returnAsLinkAttributes = array of attributes to include in link <a> tag. Use this to set class, alt and any other link attributes.
+	 *		returnAsLink = if true and $ps_field is set to a specific field in a related table, or $ps_field is set to a related table (eg. ca_entities or ca_entities.related) AND the template option is set and returnAllLocales is not set, then returned values will be links. The destination of the link will be the appropriate editor when executed within Providence or the appropriate detail page when executed within Pawtucket or another front-end. Default is false.
+	 *		returnAsLinkText = text to use a content of HTML link. If omitted the url itself is used as the link content.
+	 *		returnAsLinkAttributes = array of attributes to include in link <a> tag. Use this to set class, alt and any other link attributes.
 	 *		returnAsLinkTarget = Optional link target. If any plugin implementing hookGetAsLink() responds to the specified target then the plugin will be used to generate the links rather than CA's default link generator.
 	 *		filter = optional array of elements to filter returned values on. The element must be part off the container being fetched from. For example, if you're get()'ing a value from a container element (Eg. ca_objects.dates.date_value) you can filter on any other subelement in that container by passing the name of the subelement and a value (Eg. "date_type" => "copyright"). Pass only the name of the subelement, not the full path that includes the table and container element. You can filter on multiple subelements by passing each subelement as a key in the array. Only values that match all filters are returned. You can filter on multiple values for a subelement by passing an array of values rather than a scalar (Eg. "date_type" => array("copyright", "patent")). Values that match *any* of the values will be returned. Only simple equivalance is supported. NOTE: Filters are only available when returnAsArray is set. They will be ignored if returnAsArray is not set.
 	 */

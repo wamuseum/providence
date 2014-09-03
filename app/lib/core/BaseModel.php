@@ -6196,9 +6196,6 @@ class BaseModel extends BaseObject {
 
 						$vn_dest_table_num = $t_dest->tableNum();
 						$vs_dest_primary_key = $t_dest->primaryKey();
-//						if($va_path_to_dest && !is_array($va_path_to_dest)){
-//							$va_path_to_dest = array($va_path_to_dest);
-//						}
 						$va_path_to_dest[] = $vs_dest_table;
 
 						$vs_cur_table = $this->tableName();
@@ -7246,7 +7243,7 @@ class BaseModel extends BaseObject {
 	 *		includeSelf = include this record (def. false)
 	 *		additionalTableToJoin = name of additional table data to return
 	 *		returnDeleted = return deleted records in list (def. false)
-	 *      restrictToTypes = an array of types to restrict the hierarchy by
+	 *		restrictToTypes = an array of types to restrict the hierarchy by
 	 * @return array 
 	 */
 	public function &getHierarchyAncestors($pn_id=null, $pa_options=null) {
@@ -7257,7 +7254,7 @@ class BaseModel extends BaseObject {
 			$va_type_ids = caMergeTypeRestrictionLists($this, $pa_options);
 		}
 		$vs_table_name = $this->tableName();
-			
+
 		$va_additional_table_select_fields = array();
 		$va_additional_table_wheres = array();
 			
@@ -7338,13 +7335,13 @@ class BaseModel extends BaseObject {
 					if ($pb_include_self) {
 						while ($qr_root->nextRow()) {
 							if (!$vn_parent_id) { $vn_parent_id = $qr_root->get($vs_hier_parent_id_fld); }
-//							if(!empty($va_type_ids)){
-//								$vn_root_type = (int)$qr_root->get($this->getTypeFieldName());
-//								if($vn_root_type && !in_array($vn_root_type, $va_type_ids)){
-//									// The root is not one of the desired types
-//									continue;
-//								}
-//							}
+							if(!empty($va_type_ids)){
+								$vn_root_type = (int)$qr_root->get($this->getTypeFieldName());
+								if(is_null($vn_root_type) || !in_array($vn_root_type, $va_type_ids)){
+									// The current record has no type or is not one of the desired types
+									continue;
+								}
+							}
 							if ($pb_ids_only) {
 								$va_ancestors[] = $qr_root->get($this->primaryKey());
 							} else {
@@ -7375,8 +7372,8 @@ class BaseModel extends BaseObject {
 								if (!$vn_parent_id) { $vn_parent_id = $qr_hier->get($vs_hier_parent_id_fld); }
 								if(!empty($va_type_ids)){
 									$vn_parent_type = (int)$qr_hier->get($this->getTypeFieldName());
-									if($vn_parent_type && !in_array($vn_parent_type, $va_type_ids)){
-										// The parentis not one of the desired types
+									if(is_null($vn_parent_type) || !in_array($vn_parent_type, $va_type_ids)){
+										// The ancestor is not one of the desired types or is has no type and is therefore excluded
 										continue;
 									}
 								}
