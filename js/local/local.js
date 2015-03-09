@@ -134,6 +134,7 @@ wam.initDatepickers = function () {
 // ------------------------------
 wam.initConditionRecommendationTypes = function() {
 	// checks if element exists
+  
 	if ($('#P797OccurrenceEditorForm_attribute_413Item_new_0').length) {
 
 		// sets listener for when radio button is clicked
@@ -166,6 +167,80 @@ wam.initConditionRecommendationTypes = function() {
 
 				// update the text in the CKeditor to be the condition recommendation type
 				CKEDITOR.instances['P798OccurrenceEditorForm_attribute_412_412_new_0'].setData( wamsubstring );
+			}
+		});
+	}
+  
+    //Live
+    if ($('#P526OccurrenceEditorForm_attribute_318Item_new_0').length) {
+
+		// sets listener for when radio button is clicked
+		$('#P526OccurrenceEditorForm_attribute_318Item_new_0 input').on('click', function() {
+			
+			// gets text of clicked radio button (no label so having to use parent)
+			var wamlabel = $(this).parent().text();
+
+			// trim white space, lowecase the label and replace spaces with underscores
+			wamlabel = wamlabel.trim().toLowerCase();
+			wamlabel = wamlabel.replace(' ','_');
+
+			// get the text inside the textarea
+			var wamcon = $('#P519OccurrenceEditorForm_attribute_317_317_new_0').val();
+
+			// check to see if default text is in the text area
+			var wamstring = wamcon.match(/--start/g);
+
+			// if default text present then do something
+			if (wamstring !== null) {
+			
+				// remove text before start identifier ( '[[' + radio button label text + '--start]]' )
+				var wamsubstring = wamcon.substring(wamcon.indexOf('[[' + wamlabel + '--start]]'));
+
+				//remove the start identifer ( '[[' + radio button label text + '--start]]' )
+				wamsubstring = wamsubstring.replace('[[' + wamlabel + '--start]]','');
+
+				//remove text after and including the end identifier ( '[[' + radio button label text + '--end]]' )
+				wamsubstring = wamsubstring.substring(0, wamsubstring.indexOf('[[' + wamlabel + '--end]]'));
+
+				// update the text in the CKeditor to be the condition recommendation type
+				CKEDITOR.instances['P519OccurrenceEditorForm_attribute_317_317_new_0'].setData( wamsubstring );
+			}
+		});
+	}
+  
+    //staging
+    if ($('#P527OccurrenceEditorForm_attribute_316Item_new_0').length) {
+
+		// sets listener for when radio button is clicked
+		$('#P527OccurrenceEditorForm_attribute_316Item_new_0 input').on('click', function() {
+			
+			// gets text of clicked radio button (no label so having to use parent)
+			var wamlabel = $(this).parent().text();
+
+			// trim white space, lowecase the label and replace spaces with underscores
+			wamlabel = wamlabel.trim().toLowerCase();
+			wamlabel = wamlabel.replace(' ','_');
+
+			// get the text inside the textarea
+			var wamcon = $('#P486OccurrenceEditorForm_attribute_315_315_new_0').val();
+
+			// check to see if default text is in the text area
+			var wamstring = wamcon.match(/--start/g);
+
+			// if default text present then do something
+			if (wamstring !== null) {
+			
+				// remove text before start identifier ( '[[' + radio button label text + '--start]]' )
+				var wamsubstring = wamcon.substring(wamcon.indexOf('[[' + wamlabel + '--start]]'));
+
+				//remove the start identifer ( '[[' + radio button label text + '--start]]' )
+				wamsubstring = wamsubstring.replace('[[' + wamlabel + '--start]]','');
+
+				//remove text after and including the end identifier ( '[[' + radio button label text + '--end]]' )
+				wamsubstring = wamsubstring.substring(0, wamsubstring.indexOf('[[' + wamlabel + '--end]]'));
+
+				// update the text in the CKeditor to be the condition recommendation type
+				CKEDITOR.instances['P486OccurrenceEditorForm_attribute_315_315_new_0'].setData( wamsubstring );
 			}
 		});
 	}
