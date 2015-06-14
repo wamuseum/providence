@@ -316,11 +316,11 @@ class MultipartIDNumber extends IDNumber {
 		return $va_element_vals;
 	}
 	# -------------------------------------------------------
-	public function validateValue($ps_value) {
-		//if (!$ps_value) { return array(); }
-		$va_elements = $this->getElements();
-		if (!is_array($va_elements)) { return array(); }
-	}
+//	public function validateValue($ps_value) {
+//		//if (!$ps_value) { return array(); }
+//		$va_elements = $this->getElements();
+//		if (!is_array($va_elements)) { return array(); }
+//	}
 	# -------------------------------------------------------
 	public function validateValue($ps_value) {
 		//if (!$ps_value) { return array(); }
