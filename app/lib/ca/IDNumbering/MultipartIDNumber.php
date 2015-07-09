@@ -312,12 +312,6 @@ class MultipartIDNumber extends IDNumber {
 				$va_element_vals[] = substr($ps_value, $vn_strpos, $vn_width);
 				$vn_strpos = is_null($vn_width) ? mb_strlen($ps_value) : $vn_strpos + $vn_width;
 			}
-				}
-				// Take the calculated width from the input value as the element value; if $vn_width is null, use the remainder
-				// of the input string
-				$va_element_vals[] = substr($ps_value, $vn_strpos, $vn_width);
-				$vn_strpos = is_null($vn_width) ? mb_strlen($ps_value) : $vn_strpos + $vn_width;
-			}
 		}
 		return $va_element_vals;
 	}
