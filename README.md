@@ -11,11 +11,6 @@ Providence is the “back-end” cataloging component of CollectiveAccess, a web
 
 CollectiveAccess is freely available under the open source GNU Public License, meaning it’s not only free to download and use but that users are encouraged to share and distribute code.
 
-----Important note for Pawtucket users----
-
-Please note that the current Pawtucket 1.4 release is *not* compatible with Providence 1.5. An entirely new Pawtucket interface, version 2.0, is in development and can be found on GitHub at https://github.com/collectiveaccess/pawtucket2. If you must run the "classic" 1.x Pawtucket interface use the develop branch available at https://github.com/collectiveaccess/pawtucket/tree/develop. This branch is generally compatible but requires more testing before release.
-
-We plan one more release of Pawtucket 1.x including Providence 1.5 compatibility. After that all development will focus on Pawtucket 2.0. Pawtucket 1.x themes are not compatible with 2.0, although most 1.x plugins can be made to work in 2.0 with minimal tweaking.
 
 ----Useful Links:----
 
@@ -38,5 +33,4 @@ We plan one more release of Pawtucket 1.x including Providence 1.5 compatibility
 
 ----Other modules:----
 
-   Pawtucket 1.x development code: https://github.com/collectiveaccess/pawtucket/tree/develop
-   Pawtucket 2.0: https://github.com/collectiveaccess/pawtucket2 (The public access front-end application for Providence)
+   Pawtucket: https://github.com/collectiveaccess/pawtucket2 (The public access front-end application for Providence)
