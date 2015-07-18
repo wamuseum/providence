@@ -729,26 +729,28 @@
 			}
 		}
  		# ------------------------------------------------------------------
- 		/**
- 		 *
- 		 *
- 		 * @param $ps_field -
- 		 * @param $pa_options -
- 		 *		returnAsArray - 
- 		 * 		delimiter -
- 		 *		template -
- 		 *		locale -
- 		 *		returnAllLocales - Returns requested value in all locales for which it is defined. Default is false. Note that this is not supported for hierarchy specifications (eg. ca_objects.hierarchy).
- 		 *		direction - For hierarchy specifications (eg. ca_objects.hierarchy) this determines the order in which the hierarchy is returned. ASC will return the hierarchy root first while DESC will return it with the lowest node first. Default is ASC.
- 		 *		top - For hierarchy specifications (eg. ca_objects.hierarchy) this option, if set, will limit the returned hierarchy to the first X nodes from the root down. Default is to not limit.
- 		 *		bottom - For hierarchy specifications (eg. ca_objects.hierarchy) this option, if set, will limit the returned hierarchy to the first X nodes from the lowest node up. Default is to not limit.
- 		 * 		hierarchicalDelimiter - Text to place between items in a hierarchy for a hierarchical specification (eg. ca_objects.hierarchy) when returning as a string
- 		 *		removeFirstItems - If set to a non-zero value, the specified number of items at the top of the hierarchy will be omitted. For example, if set to 2, the root and first child of the hierarchy will be omitted. Default is zero (don't delete anything).
- 		 *		checkAccess = array of access values to filter results by; if defined only items with the specified access code(s) are returned. Only supported for <table_name>.hierarchy.preferred_labels and <table_name>.children.preferred_labels because these returns sets of items. For <table_name>.parent.preferred_labels, which returns a single row at most, you should do access checking yourself. (Everything here applies equally to nonpreferred_labels)
- 	 	 *		sort = optional bundles to sort returned values on. Only supported for <table_name>.children.preferred_labels. The bundle specifiers are fields with or without tablename.
- 	 	 *		sort_direction = direction to sort results by, either 'asc' for ascending order or 'desc' for descending order; default is 'asc'
- 	 	 *		convertCodesToDisplayText = if true then non-preferred label type_ids are automatically converted to display text in the current locale; default is false (return non-preferred label type_id raw)
- 	 	 */
+		/**
+		 *
+		 *
+		 * @param $ps_field -
+		 * @param $pa_options -
+		 *        returnAsArray -
+		 *        delimiter -
+		 *        template -
+		 *        locale -
+		 *        returnAllLocales - Returns requested value in all locales for which it is defined. Default is false. Note that this is not supported for hierarchy specifications (eg. ca_objects.hierarchy).
+		 *        direction - For hierarchy specifications (eg. ca_objects.hierarchy) this determines the order in which the hierarchy is returned. ASC will return the hierarchy root first while DESC will return it with the lowest node first. Default is ASC.
+		 *        top - For hierarchy specifications (eg. ca_objects.hierarchy) this option, if set, will limit the returned hierarchy to the first X nodes from the root down. Default is to not limit.
+		 *        bottom - For hierarchy specifications (eg. ca_objects.hierarchy) this option, if set, will limit the returned hierarchy to the first X nodes from the lowest node up. Default is to not limit.
+		 *        hierarchicalDelimiter - Text to place between items in a hierarchy for a hierarchical specification (eg. ca_objects.hierarchy) when returning as a string
+		 *        removeFirstItems - If set to a non-zero value, the specified number of items at the top of the hierarchy will be omitted. For example, if set to 2, the root and first child of the hierarchy will be omitted. Default is zero (don't delete anything).
+		 *        checkAccess = array of access values to filter results by; if defined only items with the specified access code(s) are returned. Only supported for <table_name>.hierarchy.preferred_labels and <table_name>.children.preferred_labels because these returns sets of items. For <table_name>.parent.preferred_labels, which returns a single row at most, you should do access checking yourself. (Everything here applies equally to nonpreferred_labels)
+		 *        sort = optional bundles to sort returned values on. Only supported for <table_name>.children.preferred_labels. The bundle specifiers are fields with or without tablename.
+		 *        sort_direction = direction to sort results by, either 'asc' for ascending order or 'desc' for descending order; default is 'asc'
+		 *        convertCodesToDisplayText = if true then non-preferred label type_ids are automatically converted to display text in the current locale; default is false (return non-preferred label type_id raw)
+		 *        restrictHierarchyToTypes = an array of types to restrict the hierarchy to if you are requesting a hierarchy
+		 * @return array|mixed|string
+		 */
 		public function get($ps_field, $pa_options=null) {
 			$vs_template = 				(isset($pa_options['template'])) ? $pa_options['template'] : null;
 			$vb_return_as_array = 		(isset($pa_options['returnAsArray'])) ? (bool)$pa_options['returnAsArray'] : false;
@@ -848,10 +850,18 @@
 						}
 						
 						$vn_top_id = null;
-						if (!($va_ancestor_list = $this->getHierarchyAncestors(null, array('idsOnly' => true, 'includeSelf' => true)))) {
+
+						$pa_ancestor_options = array('idsOnly' => true, 'includeSelf' => true);
+						if($va_hierarchy_type_restrictions = caGetOption('restrictHierarchyToTypes', $pa_options, array())){
+							if(!is_array($va_hierarchy_type_restrictions)){
+								$va_hierarchy_type_restrictions = array($va_hierarchy_type_restrictions);
+							}
+							$pa_ancestor_options['restrictToTypes'] = $va_hierarchy_type_restrictions;
+						}
+						if (!($va_ancestor_list = $this->getHierarchyAncestors(null, $pa_ancestor_options))) {
 							$va_ancestor_list = array();
 						}
-						
+
 						// TODO: this should really be in a model subclass
 						if (($this->tableName() == 'ca_objects') && $this->getAppConfig()->get('ca_objects_x_collections_hierarchy_enabled') && ($vs_coll_rel_type = $this->getAppConfig()->get('ca_objects_x_collections_hierarchy_relationship_type'))) {
 							require_once(__CA_MODELS_DIR__.'/ca_objects.php');

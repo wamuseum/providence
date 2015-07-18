@@ -6196,7 +6196,6 @@ class BaseModel extends BaseObject {
 
 						$vn_dest_table_num = $t_dest->tableNum();
 						$vs_dest_primary_key = $t_dest->primaryKey();
-
 						$va_path_to_dest[] = $vs_dest_table;
 
 						$vs_cur_table = $this->tableName();
@@ -6708,6 +6707,7 @@ class BaseModel extends BaseObject {
 	 *		returnDeleted = return deleted records in list [default: false]
 	 *		additionalTableToJoin = name of table to join to hierarchical table (and return fields from); only fields related many-to-one are currently supported
 	 *		idsOnly = return simple array of primary key values for child records rather than full result
+	 *		restrictToTypes = an array of types to restrict by
 	 *
 	 * @return Mixed DbResult or array
 	 */
@@ -6721,7 +6721,7 @@ class BaseModel extends BaseObject {
 			$vs_hier_parent_id_fld	= $this->getProperty("HIERARCHY_PARENT_ID_FLD");
 			$vs_hier_id_fld 		= $this->getProperty("HIERARCHY_ID_FLD");
 			$vs_hier_id_table 		= $this->getProperty("HIERARCHY_DEFINITION_TABLE");
-			
+
 			if (!$pn_id) {
 				if (!($pn_id = $this->getHierarchyRootID($this->get($vs_hier_id_fld)))) {
 					return null;
@@ -6736,7 +6736,13 @@ class BaseModel extends BaseObject {
 					$vs_hier_id_sql = " AND (".$vs_hier_id_fld." = ".$vn_hierarchy_id.")";
 				}
 			}
-			
+			$vs_type_id_sql = "";
+			if ((isset($pa_options['restrictToTypes']) || isset($pa_options['restrict_to_types'])) && method_exists($this, 'getTypeFieldName') && ($vs_type_field_name = $this->getTypeFieldName())) {
+				$va_type_ids = caMergeTypeRestrictionLists($this, $pa_options);
+				if (is_array($va_type_ids) && sizeof($va_type_ids)) {
+					$vs_type_id_sql .= $vs_type_field_name.' IN ('.join(',', $va_type_ids).')';
+				}
+			}
 			
 			$o_db = $this->getDb();
 			$qr_root = $o_db->query("
@@ -6763,7 +6769,8 @@ class BaseModel extends BaseObject {
 					if ($vn_hierarchy_id) {
 						$vs_hier_id_sql = " AND ({$vs_table_name}.{$vs_hier_id_fld} = {$vn_hierarchy_id})";
 					}
-					
+
+					$vs_additional_wheres = '';
 					$va_sql_joins = array();
 					if (isset($pa_options['additionalTableToJoin']) && ($pa_options['additionalTableToJoin'])){ 
 						$ps_additional_table_to_join = $pa_options['additionalTableToJoin'];
@@ -6785,8 +6792,7 @@ class BaseModel extends BaseObject {
 						if (isset($pa_options['additionalTableWheres']) && is_array($pa_options['additionalTableWheres'])) {
 							$va_additional_table_wheres = $pa_options['additionalTableWheres'];
 						}
-						
-						$vs_additional_wheres = '';
+
 						if (is_array($va_additional_table_wheres) && (sizeof($va_additional_table_wheres) > 0)) {
 							$vs_additional_wheres = ' AND ('.join(' AND ', $va_additional_table_wheres).') ';
 						}
@@ -6807,6 +6813,7 @@ class BaseModel extends BaseObject {
 							({$vs_table_name}.{$vs_hier_left_fld} BETWEEN ".$qr_root->get($vs_hier_left_fld)." AND ".$qr_root->get($vs_hier_right_fld).")
 							{$vs_hier_id_sql}
 							{$vs_deleted_sql}
+							{$vs_type_id_sql}
 							{$vs_additional_wheres}
 						ORDER BY
 							{$vs_table_name}.{$vs_hier_left_fld}
@@ -7229,21 +7236,25 @@ class BaseModel extends BaseObject {
 	 * Get hierarchy ancestors
 	 * 
 	 * @access public
-	 * @param int optional, primary key value of a record.
+	 * @param int $pn_id optional, primary key value of a record.
 	 * 	Use this if you want to know the ancestors of a record different than $this
-	 * @param array optional, options 
+	 * @param array $pa_options optional, options
 	 *		idsOnly = just return the ids of the ancestors (def. false)
 	 *		includeSelf = include this record (def. false)
-	 *		additionalTableToJoin = name of additonal table data to return
+	 *		additionalTableToJoin = name of additional table data to return
 	 *		returnDeleted = return deleted records in list (def. false)
+	 *		restrictToTypes = an array of types to restrict the hierarchy by
 	 * @return array 
 	 */
 	public function &getHierarchyAncestors($pn_id=null, $pa_options=null) {
 		$pb_include_self = (isset($pa_options['includeSelf']) && $pa_options['includeSelf']) ? true : false;
 		$pb_ids_only = (isset($pa_options['idsOnly']) && $pa_options['idsOnly']) ? true : false;
-		
+		$va_type_ids = array();
+		if ((isset($pa_options['restrictToTypes']) || isset($pa_options['restrict_to_types'])) && method_exists($this, 'getTypeFieldName') && ($vs_type_field_name = $this->getTypeFieldName())) {
+			$va_type_ids = caMergeTypeRestrictionLists($this, $pa_options);
+		}
 		$vs_table_name = $this->tableName();
-			
+
 		$va_additional_table_select_fields = array();
 		$va_additional_table_wheres = array();
 			
@@ -7324,6 +7335,13 @@ class BaseModel extends BaseObject {
 					if ($pb_include_self) {
 						while ($qr_root->nextRow()) {
 							if (!$vn_parent_id) { $vn_parent_id = $qr_root->get($vs_hier_parent_id_fld); }
+							if(!empty($va_type_ids)){
+								$vn_root_type = (int)$qr_root->get($this->getTypeFieldName());
+								if(is_null($vn_root_type) || !in_array($vn_root_type, $va_type_ids)){
+									// The current record has no type or is not one of the desired types
+									continue;
+								}
+							}
 							if ($pb_ids_only) {
 								$va_ancestors[] = $qr_root->get($this->primaryKey());
 							} else {
@@ -7352,7 +7370,15 @@ class BaseModel extends BaseObject {
 							$vn_parent_id = null;
 							while ($qr_hier->nextRow()) {
 								if (!$vn_parent_id) { $vn_parent_id = $qr_hier->get($vs_hier_parent_id_fld); }
+								if(!empty($va_type_ids)){
+									$vn_parent_type = (int)$qr_hier->get($this->getTypeFieldName());
+									if(is_null($vn_parent_type) || !in_array($vn_parent_type, $va_type_ids)){
+										// The ancestor is not one of the desired types or is has no type and is therefore excluded
+										continue;
+									}
+								}
 								if ($pb_ids_only) {
+
 									$va_ancestors[] = $qr_hier->get($this->primaryKey());
 								} else {
 									$va_ancestors[] = array(
