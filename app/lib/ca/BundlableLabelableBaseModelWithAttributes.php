@@ -1763,6 +1763,7 @@ class BundlableLabelableBaseModelWithAttributes extends LabelableBaseModelWithAt
 		$vs_output = str_replace("^ERRORS", join('; ', $va_errors), $vs_output);
 		$vs_output = str_replace("^LABEL", $vs_label, $vs_output);
 		$vs_output = str_replace("^DOCUMENTATIONLINK", $vs_documentation_link, $vs_output);
+		$vs_output = str_replace("^CONTAINERID", $ps_placement_code . $pa_options['formName'] . "_container", $vs_output);
 
 		$ps_bundle_label = $vs_label_text;
 		
