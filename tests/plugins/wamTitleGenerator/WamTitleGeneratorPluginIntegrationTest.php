@@ -113,7 +113,7 @@ class WamTitleGeneratorPluginIntegrationTest extends AbstractPluginIntegrationTe
 			)
 		);
 		// Note the collection names here are collection's label values, not idno, but the object is given as idno
-		$vs_expected_title = 'generated: collection2 ; collection3 ' . self::_getIdno('matchingRecordWithSingleCollection');
+		$vs_expected_title = 'generated: collection2; collection3 ' . self::_getIdno('matchingRecordWithSingleCollection');
 		$this->assertEquals($vs_expected_title, self::_getLabel($vo_object, 'name'), 'Matching record with single related collection generates correct title value');
 	}
 

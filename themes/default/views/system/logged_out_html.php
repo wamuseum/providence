@@ -35,13 +35,12 @@
 		<link href="<?php print $this->request->getThemeUrlPath(); ?>/css/login.css" rel="stylesheet" type="text/css" />
 <?php
 	print AssetLoadManager::getLoadHTML($this->request);
-?>
-<?php
 	if (file_exists($this->request->getThemeDirectoryPath().'/css/wam-login.css')) {
-		print '<link rel="stylesheet" href="'.$this->request->getThemeUrlPath().'/css/wam-login.css" type="text/css" media="screen" />
-';
+?>
+		<link rel="stylesheet" href="<?php print $this->request->getThemeUrlPath(); ?>/css/wam-login.css" type="text/css" media="screen" />
+<?php
 	}
-	?>
+?>
 
 		<script type="text/javascript">
 			// initialize CA Utils
