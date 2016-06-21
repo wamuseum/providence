@@ -154,6 +154,8 @@ class ExpressionParserTest extends PHPUnit_Framework_TestCase {
 	public function testVars() {
 		$this->assertTrue(ExpressionParser::evaluate('^var = 5', array('var' => 5)));
 		$this->assertEquals('test123', ExpressionParser::evaluate('^ca_objects.preferred_labels', array('ca_objects.preferred_labels' => 'test123')));
+		$this->assertEquals('Poa annua', ExpressionParser::evaluate('join(" ", ^Genus, ^Species)', array('Genus' => 'Poa', 'Species' => 'annua')));
+		$this->assertEquals('Poa annua L.', ExpressionParser::evaluate('implode(" ", ^Genus, ^Species, ^Authority)', array('Genus' => 'Poa', 'Species' => 'annua', 'Authority' => 'L.')));
 	}
 
 	public function testObscureVars() {
