@@ -1,6 +1,6 @@
 <?php
 /* ----------------------------------------------------------------------
- * app/printTemplates/labels/local/Arachnids.php
+ * app/printTemplates/labels/local/TZ_Inverts_No_Reg.php
  * ----------------------------------------------------------------------
  * CollectiveAccess
  * Open-source collections management software
