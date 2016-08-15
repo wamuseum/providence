@@ -1,6 +1,6 @@
 <?php
 /* ----------------------------------------------------------------------
- * app/printTemplates/labels/local/Arachnids.php
+ * app/printTemplates/labels/local/TZ_Inverts_No_Reg.php
  * ----------------------------------------------------------------------
  * CollectiveAccess
  * Open-source collections management software
@@ -49,11 +49,11 @@
  <div class="labelContainer labelArachnids" >
  	<div class="labelDetails">
  		<ul>
-		 	<li>Locality: {{{<ifdef code="ca_objects.locality">^ca_objects.locality</ifdef>}}}</li>
-		 	<li>{{{ ^ca_objects.verbatimLatitude }}} {{{ ^ca_objects.verbatimLongitude }}} (WGS 84)</li>
-		 	<li>Collector:{{{ ^ca_entities.preferred_labels.displayname%restrictToRelationshipTypes=discover%delimiter=_ }}}</li>
-		 	<li>Date: {{{<ifdef code="ca_objects.eventDate"> ^ca_objects.eventDate</ifdef>}}}</li>
+		 	{{{<ifdef code="ca_places"><li>^ca_places.hierarchy.preferred_labels%maxLevelsFromBottom=3%delimiter=,_</li></ifdef>}}}
+		 	{{{<ifdef code="ca_objects.verbatimLocality"><li>Locality: ^ca_objects.verbatimLocality</li></ifdef>}}}
+		 	{{{ <ifdef code="ca_objects.verbatimLatitude"> <li>^ca_objects.verbatimLatitude <ifdef code="ca_objects.verbatimLatitudeTo"> - ^ca_objects.verbatimLatitudeTo</ifdef> ^ca_objects.verbatimLongitude <ifdef code="ca_objects.verbatimLongitudeTo"> - ^ca_objects.verbatimLongitudeTo</ifdef> (WGS 84)</li></ifdef> }}}
+		 	<li>Collector:{{{ ^ca_entities.preferred_labels.displayname%restrictToRelationshipTypes=collector%delimiter=;_ }}}</li>
+		 	{{{<ifdef code="ca_objects.eventDate"><li>Date:  ^ca_objects.eventDate</li></ifdef>}}}
  		</ul>
  	</div>
  </div>
- 

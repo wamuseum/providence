@@ -35,6 +35,6 @@
 <html>
 	<head>
 		<title><?php print $this->getVar('title'); ?></title>
-		<link type="text/css" href="pdf.css" rel="stylesheet" />
+		<link type="text/css" href="<?php print $this->getVar('base_path'); ?>/pdf.css" rel="stylesheet" />
 	</head>
 	<body>
