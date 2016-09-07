@@ -168,3 +168,12 @@
 	text-align: left;
 }
 
+.typeStatus {
+	float: right;
+	text-transform: uppercase;
+	font-family: "Courier New", Courier, monospace;
+	padding: 0.5em;
+	outline: dashed 1px black;
+	clear: none;
+	font-size: 9px;
+}

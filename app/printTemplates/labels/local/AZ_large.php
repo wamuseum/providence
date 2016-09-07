@@ -52,8 +52,8 @@
  	<div class="labelHeading">
  		<p>
  			Western Australian Museum<br />			
- 			<strong>Family<br />
- 			{{{ ^ca_list_items.preferred_labels%restrictToRelationshipTypes=identification }}}</strong>
+ 			<strong>{{{ ^ca_list_items.family%restrictToRelationshipTypes=identification }}}<br />
+ 			<em>{{{ ^ca_list_items.preferred_labels%restrictToRelationshipTypes=identification ^ca_objects_x_vocabulary_terms.identificationQualifier }}}</em></strong> {{{ <ifdef code="ca_objects_x_vocabulary_terms.typeStatus"><div class="typeStatus">^ca_objects_x_vocabulary_terms.typeStatus</div></ifdef> }}}
  		</p>
  	</div>
  	<div class="labelRegNo">
@@ -63,19 +63,18 @@
  	</div>
  	<div class="labelDetails">
  		<ul>
-		 	<li>Locality: {{{<ifdef code="ca_occurrences.locality">^ca_occurrences.locality</ifdef>}}}</li>
-		 	<li>GPS {{{ ^ca_occurrences.verbatimLatitude }}} {{{ ^ca_occurrences.verbatimLongitude }}}</li>
-		 	<li>Station:{{{ ^ca_occurrences.idno }}}</li>
-		 	<li>Collector:{{{ ^ca_entities.preferred_labels.displayname%restrictToRelationshipTypes=discover%delimiter=_ }}}</li>
+		 	<li>Locality: {{{^ca_places.hierarchy.preferred_labels%maxLevelsFromBottom=3%delimiter=,_ <ifdef code="ca_objects.verbatimLocality">^ca_objects.verbatimLocality</ifdef>}}}</li>
+		 	<li>GPS {{{ ^ca_objects.verbatimLatitude }}} {{{ ^ca_objects.verbatimLongitude }}}</li>
+		 	<li>Station:{{{ ^ca_objects.stationNumber }}}</li>
+		 	<li>Collector:{{{ ^ca_entities.preferred_labels.displayname%restrictToRelationshipTypes=collector%delimiter=_; }}}</li>
 		 	<li class="right">
-	 			Depth: {{{<ifdef code="ca_occurrences.minimumDepthInMeters">^ca_occurrences.minimumDepthInMeters <more> to </more></ifdef>}}}
-	 			{{{<ifdef code="ca_occurrences.maximumDepthInMeters"> to ^ca_occurrences.maximumDepthInMeters</ifdef>}}}
+	 			Depth: {{{<ifdef code="ca_objects.verbatimDepth">^ca_objects.verbatimDepth</ifdef>}}}
+	 			{{{<ifdef code="ca_objects.verbatimDepthTo"> to ^ca_objects.verbatimDepthTo</ifdef>}}}
 	 		</li>
-		 	<li>Date: {{{<ifdef code="ca_occurrences.eventDate"> ^ca_occurrences.eventDate</ifdef>}}}</li>
-	 		<li class="right">Date Det.{{{<ifdef code="ca_occurrences.dateIdentified">^ca_occurrences.dateIdentified</ifdef>}}}</li>
-	 		<li>Det. by {{{<ifdef code="ca_objects.identifiedBy"> ^ca_objects.identifiedBy</ifdef>}}}</li> 		 
-			<li class="center">Collecting trip</li>
+		 	<li>Date: {{{<ifdef code="ca_objects.eventDate"> ^ca_objects.eventDate</ifdef>}}}</li>
+	 		<li class="right">Date Det.{{{<ifdef code="ca_objects_x_vocabulary_terms.dateIdentified">^ca_objects_x_vocabulary_terms.dateIdentified</ifdef>}}}</li>
+	 		<li>Det. by {{{<ifdef code="ca_objects_x_vocabulary_terms.identifiedBy"> ^ca_objects_x_vocabulary_terms.identifiedBy</ifdef>}}}</li>
+			<li class="center">{{{^ca_objects.eventName}}}</li>
  		</ul>
  	</div>
  </div>
- 
