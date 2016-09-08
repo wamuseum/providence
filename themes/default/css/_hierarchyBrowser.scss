@@ -20,4 +20,11 @@ a.hierarchyBrowserLevelSelected {
 
 .hierarchyBrowserSearchBar {
 	margin: 0;
+	float: none;
+}
+input.hierarchyBrowserSearchBar {
+	margin: 0;
+	position: absolute;
+	bottom: 0;
+	left: 0;
 }
