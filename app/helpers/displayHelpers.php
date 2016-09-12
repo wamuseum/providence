@@ -541,7 +541,7 @@ define("__CA_BUNDLE_DISPLAY_TEMPLATE_TAG_REGEX__", "/\^([0-9]+(?=[.,;])|[\/A-Za-
 	function caEditorFieldList($po_request, $pt_subject, $pa_bundle_list, $pa_options=null) {
 		$vs_buf = "<script type=\"text/javascript\">
 		jQuery(document).ready(function() {
-			jQuery(document).bind('keydown.ctrl_f', function() {
+			jQuery(document).bind('keydown.ctrl_shift_f', function() {
 				caHierarchyOverviewPanel.hidePanel({dontCloseMask:1});
 				caEditorFieldList.onOpenCallback = function(){
 					var selector = '#' + caEditorFieldList.panelID + ' a.editorFieldListLink:link';
