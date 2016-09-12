@@ -54,7 +54,7 @@
 			// Focus the first element in popup
 			'keydown.ctrl_f': function () {
 				$('#editorFieldList').find('a:first-child').focus();
-				return false;
+				return true;
 			},
 			// Duplicate the current record
 			'keydown.alt_p': function () {
