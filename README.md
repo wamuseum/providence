@@ -5,9 +5,9 @@ CollectiveAccess: [![Build Status](https://secure.travis-ci.org/collectiveaccess
 
 WA Museum fork: [![Build Status](https://secure.travis-ci.org/wamuseum/providence.png?branch=master-fix)](http://travis-ci.org/wamuseum/providence)
 
-Thank you for downloading Providence version 1.6.1!
+Thank you for downloading Providence version 1.6.3!
 
-Version 1.6.1 is a maintenance release. A list of fixes can be found at http://clangers.collectiveaccess.org/jira/browse/PROV-1519?jql=fixVersion%20%3D%20%221.6.1%22
+Version 1.6.3 is a maintenance release. A list of fixes can be found at http://clangers.collectiveaccess.org/jira/issues/?filter=10543
  
 Providence is the “back-end” cataloging component of CollectiveAccess, a web-based suite of applications providing a framework for management, description, and discovery of complex digital and physical collections.  Providence is highly configurable and supports a variety of metadata standards, data types, and media formats.  
 
@@ -30,7 +30,7 @@ Note that 1.6 is the first version of CollectiveAccess compatible with PHP 7.
 
    Release Notes for 1.6:  http://docs.collectiveaccess.org/wiki/Release_Notes_for_Providence_1.6
    
-   Fixed in version 1.6.1: http://clangers.collectiveaccess.org/jira/browse/PROV-1519?jql=fixVersion%20%3D%20%221.6.1%22
+   Fixed in version 1.6.3: http://clangers.collectiveaccess.org/jira/issues/?filter=10543
 
    Forum: http://www.collectiveaccess.org/support/forum
 

@@ -668,6 +668,7 @@ class ca_bundle_displays extends BundlableLabelableBaseModelWithAttributes {
 		$pa_access = 										caGetOption('checkAccess', $pa_options, null); 
 		$pa_restrict_to_types = 							caGetOption('restrictToTypes', $pa_options, null);
 		$pb_dont_include_subtypes_in_type_restriction = 	caGetOption('dontIncludeSubtypesInTypeRestriction', $pa_options, false);
+		$pb_system_only = 									caGetOption('systemOnly', $pa_options, false);
 		
 	 	$o_dm = $this->getAppDatamodel();
 	 	if ($pm_table_name_or_num && !($vn_table_num = $o_dm->getTableNum($pm_table_name_or_num))) { return array(); }
@@ -727,7 +728,7 @@ class ca_bundle_displays extends BundlableLabelableBaseModelWithAttributes {
 			}
 		}
 		
-		if ($pn_user_access == __CA_BUNDLE_DISPLAY_READ_ACCESS__) {
+		if (($pn_user_access == __CA_BUNDLE_DISPLAY_READ_ACCESS__) || $pb_system_only) {
 			$va_sql_access_wheres[] = "(bd.is_system = 1)";
 		}
 		
@@ -1895,7 +1896,7 @@ class ca_bundle_displays extends BundlableLabelableBaseModelWithAttributes {
 					}
 				} else {
 					// resolve template relative to current record
-					$vs_val = $po_result->getWithTemplate($vs_template);
+					$vs_val = $po_result->getWithTemplate($vs_template, ['delimiter' => $pa_options['delimiter']]);
 				}
 				
 			}
@@ -2149,7 +2150,9 @@ class ca_bundle_displays extends BundlableLabelableBaseModelWithAttributes {
 		
 		$va_restrictions = array();
 		while($qr_res->nextRow()) {
-			$va_restrictions[] = $qr_res->getRow();
+			$va_restriction = $qr_res->getRow();
+			$va_restriction['type_code'] = caGetListItemIdno($va_restriction['type_id']);
+			$va_restrictions[] = $va_restriction;
 		}
 		return $va_restrictions;
 	}

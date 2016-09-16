@@ -1336,8 +1336,23 @@
             <setting name="minimumAttributeBundlesToDisplay">1</setting>
           </settings>
         </restriction>
-        <!-- FOR TESTING PURPOSES -->
-        <restriction code="r3">
+      </typeRestrictions>
+    </metadataElement>
+    <!-- FOR TESTING PURPOSES -->
+    <metadataElement code="acquisition_date" datatype="DateRange">
+      <labels>
+        <label locale="en_US">
+          <name>Acquisition date</name>
+        </label>
+      </labels>
+      <settings>
+        <setting name="fieldWidth">40</setting>
+        <setting name="fieldHeight">1</setting>
+        <setting name="minChars">0</setting>
+        <setting name="maxChars">65535</setting>
+      </settings>
+      <typeRestrictions>
+        <restriction code="r1">
           <table>ca_object_lots</table>
           <settings>
             <setting name="minAttributesPerRow">0</setting>
@@ -2333,6 +2348,27 @@
         </restriction>
       </typeRestrictions>
     </metadataElement>
+    <metadataElement code="geonames" datatype="GeoNames">
+      <labels>
+        <label locale="en_US">
+          <name>Geonames</name>
+        </label>
+      </labels>
+      <settings>
+        <setting name="fieldWidth">90</setting>
+        <setting name="doesNotTakeLocale">1</setting>
+      </settings>
+      <typeRestrictions>
+        <restriction code="r1">
+          <table>ca_objects</table>
+          <settings>
+            <setting name="minAttributesPerRow">0</setting>
+            <setting name="maxAttributesPerRow">255</setting>
+            <setting name="minimumAttributeBundlesToDisplay">1</setting>
+          </settings>
+        </restriction>
+      </typeRestrictions>
+    </metadataElement>
   </elementSets>
   <userInterfaces>
     <userInterface code="standard_object_ui" type="ca_objects">
@@ -2416,6 +2452,9 @@
           <bundlePlacements>
             <placement code="ca_attribute_georeference">
               <bundle>ca_attribute_georeference</bundle>
+            </placement>
+            <placement code="ca_attribute_geonames">
+              <bundle>ca_attribute_geonames</bundle>
             </placement>
             <placement code="ca_attribute_coverageDates">
               <bundle>ca_attribute_coverageDates</bundle>
@@ -2515,6 +2554,9 @@
           <bundlePlacements>
             <placement code="ca_sets_checklist">
               <bundle>ca_sets_checklist</bundle>
+            </placement>
+            <placement code="ca_sets">
+              <bundle>ca_sets</bundle>
             </placement>
             <placement code="ca_objects">
               <bundle>ca_objects</bundle>
@@ -3069,6 +3111,9 @@
             </placement>
             <placement code="ca_attribute_description">
               <bundle>ca_attribute_description</bundle>
+            </placement>
+            <placement code="ca_sets">
+              <bundle>ca_sets</bundle>
             </placement>
           </bundlePlacements>
         </screen>
