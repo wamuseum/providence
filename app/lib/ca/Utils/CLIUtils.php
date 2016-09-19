@@ -584,7 +584,7 @@
 				$vn_timestamp = intval($po_opts->getOption("timestamp"));
 			}
 
-			$vs_profile = ConfigurationExporter::exportConfigurationAsXML($po_opts->getOption("name"), $po_opts->getOption("description"), $po_opts->getOption("base"), $po_opts->getOption("infoURL"), $vn_timestamp, $po_opts->getOption("fast-lists"));
+			$vs_profile = ConfigurationExporter::exportConfigurationAsXML($po_opts->getOption("name"), $po_opts->getOption("description"), $po_opts->getOption("base"), $po_opts->getOption("infoURL"), $vn_timestamp);
 
 			if ($vs_output) {
 				file_put_contents($vs_output, $vs_profile);
@@ -605,7 +605,6 @@
 				"description|d-s" => _t('Description of the profile, used for "profileDescription" element. (Optional)'),
 				"output|o-s" => _t('File to output profile to. If omitted profile is printed to standard output. (Optional)'),
 				"timestamp|t-s" => _t('Limit output to configuration changes made after this UNIX timestamp. (Optional)'),
-				"fast-lists|f-n" => _t('Skip list items for lists with more than this many items. The list still gets put in the profile, just not the list items that are part of it. Use this option where the list items in large lists are generally imported from a different source. (Optional)')
 			);
 		}
 		# -------------------------------------------------------

@@ -91,18 +91,15 @@ final class ConfigurationExporter {
 	# -------------------------------------------------------
 	/**
 	 * Export current configuration as XML profile
-	 *
 	 * @param string $ps_name Name of the profile, used for "profileName" element
 	 * @param string $ps_description Description of the profile, used for "profileDescription" element
 	 * @param string $ps_base Base profile
 	 * @param string $ps_info_url Info URL for the profile
 	 * @param int|null $pn_modified_after If set, only configuration elements modified *after* this unix timestamp are exported
 	 * @param bool $pb_print_status If set to true, the exporter will output some command line statuses
-	 * @param int $pn_fast_list_size The maximum number of list items a list must have to export the items in the list.
-	 *
-	 * @return string profile as XML string
+	 * @return string string profile as XML string
 	 */
-	public static function exportConfigurationAsXML($ps_name="",$ps_description="",$ps_base="",$ps_info_url="",$pn_modified_after=null,$pb_print_status=false, $pn_fast_list_size = 0) {
+	public static function exportConfigurationAsXML($ps_name="",$ps_description="",$ps_base="",$ps_info_url="",$pn_modified_after=null,$pb_print_status=false) {
 		$o_exporter = new ConfigurationExporter($pn_modified_after, $pb_print_status);
 
 		$vo_root = $o_exporter->getDOM()->createElement('profile');
@@ -114,7 +111,7 @@ final class ConfigurationExporter {
 		$vo_root->setAttribute("xsi:noNamespaceSchemaLocation","profile.xsd");
 		$vo_root->setAttribute("useForConfiguration", 1);
 
-		if(strlen($ps_base)>0){
+		if(strlen($ps_base)>0) {
 			$vo_root->setAttribute("base", $ps_base);
 		}
 
@@ -133,7 +130,7 @@ final class ConfigurationExporter {
 		}
 
 		$vo_root->appendChild($o_exporter->getLocalesAsDOM());
-		$vo_root->appendChild($o_exporter->getListsAsDOM($pn_fast_list_size));
+		$vo_root->appendChild($o_exporter->getListsAsDOM());
 		$vo_root->appendChild($o_exporter->getElementsAsDOM());
 		if($o_dict = $o_exporter->getMetadataDictionaryAsDOM()) {
 			$vo_root->appendChild($o_dict);
@@ -199,7 +196,7 @@ final class ConfigurationExporter {
 		return $vo_locales;
 	}
 	# -------------------------------------------------------
-	public function getListsAsDOM($pn_fast_list_size = 0){
+	public function getListsAsDOM() {
 		$qr_lists = $this->opo_db->query("SELECT * FROM ca_lists ORDER BY list_id");
 
 		$vo_lists = $this->opo_dom->createElement("lists");
@@ -253,14 +250,8 @@ final class ConfigurationExporter {
 			}
 
 			$vo_list->appendChild($vo_labels);
-			$vb_skip_items = false;
-			if($pn_fast_list_size){
-				$qr_count = $this->opo_db->query("SELECT count(*) c from ca_list_items i JOIN ca_lists l USING (list_id) WHERE i.deleted=0 and list_code=?", $qr_lists->get("list_code"));
-				if ($qr_count->nextRow() && $vn_num_items = (int)$qr_count->get('c')) {
-					$vb_skip_items = $vn_num_items > $pn_fast_list_size;
-				}
-			}
-			$vo_items = !$vb_skip_items ? $this->getListItemsAsDOM($t_list->getRootItemIDForList($qr_lists->get("list_code")), $qr_lists->get('list_id'));
+
+			$vo_items = $this->getListItemsAsDOM($t_list->getRootItemIDForList($qr_lists->get("list_code")), $qr_lists->get('list_id'));
 
 
 			if($this->opn_modified_after) {
@@ -278,6 +269,7 @@ final class ConfigurationExporter {
 
 				$this->printStatus(_t("Exporting changes for list %1", $qr_lists->get("list_code")));
 			}
+
 			if($vo_items) {
 				$vo_list->appendChild($vo_items);
 			}
@@ -1082,7 +1074,6 @@ final class ConfigurationExporter {
 			if($qr_types->get("sub_type_left_id")) {
 				/** @var BaseModelWithAttributes $t_left_instance */
 				$vs_left_table = $t_instance->getLeftTableName();
-				/** @var BaseModelWithAttributes $t_left_instance */
 				$t_left_instance = $this->opo_dm->getInstanceByTableNum($vs_left_table);
 
 				$vs_type_code = $t_left_instance->getTypeListCode();
@@ -1096,7 +1087,6 @@ final class ConfigurationExporter {
 			if($qr_types->get("sub_type_right_id")) {
 				/** @var BaseModelWithAttributes $t_right_instance */
 				$vs_right_table = $t_instance->getRightTableName();
-				/** @var BaseModelWithAttributes $t_right_instance */
 				$t_right_instance = $this->opo_dm->getInstanceByTableNum($vs_right_table);
 
 				$vs_type_code = $t_right_instance->getTypeListCode();
@@ -1120,7 +1110,6 @@ final class ConfigurationExporter {
 	public function getRolesAsDOM() {
 		$t_role = new ca_user_roles();
 		$t_list = new ca_lists();
-		/** @var ca_editor_ui_screens $t_ui_screens */
 		$t_ui_screens = new ca_editor_ui_screens();
 
 		$vo_roles = $this->opo_dom->createElement("roles");
