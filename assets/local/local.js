@@ -31,11 +31,12 @@
 	wam.initDatepickers = function () {
 		$('input.dateBg:not(.hasDatepicker)').datepicker(
 				{
-					dateFormat: 'yy-mm-dd',
+					dateFormat: 'dd/mm/yy',
 					changeMonth: true,
 					changeYear: true,
 					showOtherMonths: true,
-					showButtonPanel: true
+					showButtonPanel: true,
+					constrainInput: false
 				}
 		);
 	};
