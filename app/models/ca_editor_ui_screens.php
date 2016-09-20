@@ -405,6 +405,11 @@ class ca_editor_ui_screens extends BundlableLabelableBaseModelWithAttributes {
 	public function getAvailableBundles($pm_table_name_or_num=null, $pa_options=null) {
 		$pb_dont_cache = caGetOption('dontCache', $pa_options, false);
 		if (!$pm_table_name_or_num) { $pm_table_name_or_num = $this->getTableNum(); }
+		$vs_cache_key = md5($pm_table_name_or_num . serialize($pa_options));
+
+		if(MemoryCache::contains($vs_cache_key, 'UiScreensAvailableBundles')) {
+			return MemoryCache::fetch($vs_cache_key, 'UiScreensAvailableBundles');
+		}
 		
 		if (!is_numeric($pm_table_name_or_num)) { $pm_table_name_or_num = $this->_DATAMODEL->getTableNum($pm_table_name_or_num); }
 		if (!($t_instance = $this->_DATAMODEL->getInstanceByTableNum($pm_table_name_or_num, false))) { return null; }
@@ -745,6 +750,18 @@ class ca_editor_ui_screens extends BundlableLabelableBaseModelWithAttributes {
 							'description' => _t('Restricts display to items from the specified list(s). Leave all unselected for no restriction.')
 						);
 					}
+
+					if ($vs_bundle == 'ca_object_lots') {
+						$va_additional_settings['display_template'] = array(
+							'formatType' => FT_TEXT,
+							'displayType' => DT_FIELD,
+							'default' => '^ca_object_lots.preferred_labels (^ca_object_lots.idno_stub)',
+							'width' => "275px", 'height' => 4,
+							'label' => _t('Relationship display template'),
+							'description' => _t('Layout for relationship when displayed in list (can include HTML). Element code tags prefixed with the ^ character can be used to represent the value in the template. For example: <i>^my_element_code</i>.')
+						);
+					}
+
 					if (in_array($vs_bundle, array('ca_places', 'ca_list_items', 'ca_storage_locations'))) {
 						$va_additional_settings['useHierarchicalBrowser'] = array(
 							'formatType' => FT_TEXT,
@@ -1463,6 +1480,9 @@ class ca_editor_ui_screens extends BundlableLabelableBaseModelWithAttributes {
 				$va_sorted_bundles[$vs_real_key] = $va_info;
 			}
 		}
+
+		MemoryCache::save($vs_cache_key, $va_sorted_bundles, 'UiScreensAvailableBundles');
+
 		return $va_sorted_bundles;
 	}
 	# ----------------------------------------

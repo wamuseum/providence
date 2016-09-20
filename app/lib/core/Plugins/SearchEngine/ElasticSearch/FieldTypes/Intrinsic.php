@@ -118,9 +118,15 @@ class Intrinsic extends FieldType {
 			$this->getTableName() . '/' . $this->getFieldName() => $pm_content
 		);
 
-		if($t_instance->getProperty('ID_NUMBERING_ID_FIELD') == $this->getFieldName()) {
+		if($t_instance->getProperty('ID_NUMBERING_ID_FIELD') == $this->getFieldName() || (is_array($pa_options) && in_array('INDEX_AS_IDNO', $pa_options))) {
+			if (method_exists($t_instance, "getIDNoPlugInInstance") && ($o_idno = $t_instance->getIDNoPlugInInstance())) {
+				$va_values = array_values($o_idno->getIndexValues($pm_content));
+			} else {
+				$va_values = explode(' ', $pm_content);
+			}
+
 			$va_return = array(
-				$this->getTableName() . '/' . $this->getFieldName() => explode(' ', $pm_content)
+				$this->getTableName() . '/' . $this->getFieldName() => $va_values
 			);
 		}
 
@@ -140,20 +146,26 @@ class Intrinsic extends FieldType {
 	 */
 	public function getRewrittenTerm($po_term) {
 		$t_instance = \Datamodel::load()->getInstance($this->getTableName(), true);
+		$vs_raw_term = $po_term->text;
+
+		// kill trailing pipe characters. those are used by the SearchEngine to signal that this term is
+		// not to be stemmed. we ignore this option as we don't do stemming here anyway. ElasticSearch might,
+		// but users can turn that off in the ES configuration if needed.
+		$vs_raw_term = preg_replace("/\|+$/", '', $vs_raw_term);
 
 		$va_field_components = explode('/', $po_term->field);
 
-		if((strtolower($po_term->text) === '[blank]')) {
+		if((strtolower($vs_raw_term) === '[blank]')) {
 			if($t_instance instanceof \BaseLabel) { // labels usually have actual [BLANK] values
 				return new \Zend_Search_Lucene_Index_Term(
-					'"'.$po_term->text.'"', $po_term->field
+					'"'.$vs_raw_term.'"', $po_term->field
 				);
 			} else {
 				return new \Zend_Search_Lucene_Index_Term(
 					$po_term->field, '_missing_'
 				);
 			}
-		} elseif(strtolower($po_term->text) === '[set]') {
+		} elseif(strtolower($vs_raw_term) === '[set]') {
 			return new \Zend_Search_Lucene_Index_Term(
 				$po_term->field, '_exists_'
 			);
@@ -162,12 +174,18 @@ class Intrinsic extends FieldType {
 			isset($va_field_components[1]) &&
 			($t_instance->getProperty('ID_NUMBERING_ID_FIELD') == $va_field_components[1])
 		) {
-			return new \Zend_Search_Lucene_Index_Term(
-				'"'.$po_term->text.'"', $po_term->field
-			);
+			if(stripos($vs_raw_term, '*') !== false) {
+				return new \Zend_Search_Lucene_Index_Term(
+					$vs_raw_term, $po_term->field
+				);
+			} else {
+				return new \Zend_Search_Lucene_Index_Term(
+					'"'.$vs_raw_term.'"', $po_term->field
+				);
+			}
 		} else {
 			return new \Zend_Search_Lucene_Index_Term(
-				str_replace('/', '\\/', $po_term->text),
+				str_replace('/', '\\/', $vs_raw_term),
 				$po_term->field
 			);
 		}

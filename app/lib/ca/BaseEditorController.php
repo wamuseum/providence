@@ -7,7 +7,7 @@
  * ----------------------------------------------------------------------
  *
  * Software by Whirl-i-Gig (http://www.whirl-i-gig.com)
- * Copyright 2009-2015 Whirl-i-Gig
+ * Copyright 2009-2016 Whirl-i-Gig
  *
  * For more information visit http://www.CollectiveAccess.org
  *
@@ -908,6 +908,14 @@ class BaseEditorController extends ActionController {
 		}
 		$vs_form_prefix = $this->request->getParameter('_formName', pString);
 
+		$this->opo_app_plugin_manager->hookBeforeSaveItem(array(
+			'id' => $vn_subject_id,
+			'table_num' => $t_subject->tableNum(),
+			'table_name' => $t_subject->tableName(), 
+			'instance' => $t_subject,
+			'is_insert' => false)
+		);
+
 		// Save user ACL's
 		$va_users_to_set = array();
 		foreach($_REQUEST as $vs_key => $vs_val) {
@@ -962,6 +970,15 @@ class BaseEditorController extends ActionController {
 				$this->postError(1250, _t('Could not set ACL inheritance settings: %1', join("; ", $t_subject->getErrors())),"BaseEditorController->SetAccess()");
 			}
 		}
+
+		$this->opo_app_plugin_manager->hookSaveItem(array(
+			'id' => $vn_subject_id,
+			'table_num' => $t_subject->tableNum(),
+			'table_name' => $t_subject->tableName(),
+			'instance' => $t_subject,
+			'is_insert' => false)
+		);
+
 		$this->Access();
 	}
 	# -------------------------------------------------------
@@ -1629,7 +1646,7 @@ class BaseEditorController extends ActionController {
 				if (
 					(!$pt_subject->get('source_id'))
 					||
-					($pt_subject->get('source_id') && !in_array($pt_subject->get('source_id'), $va_restrict_to_sources))
+					($pt_subject->get('source_id') && in_array($pt_subject->get('source_id'), $va_restrict_to_sources))
 					||
 					((strlen($vn_source_id = $this->request->getParameter('source_id', pInteger))) && !in_array($vn_source_id, $va_restrict_to_sources))
 				) {
@@ -2102,12 +2119,22 @@ class BaseEditorController extends ActionController {
 
 		if (!($vn_limit = ini_get('max_execution_time'))) { $vn_limit = 30; }
 		set_time_limit($vn_limit * 2);
-		$o_zip = new ZipStream();
-		foreach($va_file_paths as $vs_path => $vs_name) {
-			$o_zip->addFile($vs_path, $vs_name);
+		
+		if (sizeof($va_file_paths) > 1) {
+			$o_zip = new ZipStream();
+			foreach($va_file_paths as $vs_path => $vs_name) {
+				$o_zip->addFile($vs_path, $vs_name);
+			}
+			$o_view->setVar('zip_stream', $o_zip);
+			$o_view->setVar('archive_name', preg_replace('![^A-Za-z0-9\.\-]+!', '_', $t_subject->get('idno')).'.zip');
+		} else {
+			foreach($va_file_paths as $vs_path => $vs_name) {
+				$o_view->setVar('archive_path', $vs_path);
+				$o_view->setVar('archive_name', $vs_name);
+				break;
+			}
 		}
-		$o_view->setVar('zip_stream', $o_zip);
-		$o_view->setVar('archive_name', preg_replace('![^A-Za-z0-9\.\-]+!', '_', $t_subject->get('idno')).'.zip');
+
 
 		$this->response->addContent($o_view->render('download_file_binary.php'));
 		set_time_limit($vn_limit);
@@ -2202,7 +2229,7 @@ class BaseEditorController extends ActionController {
 		$vn_user_id = $this->request->getUserID();
 		$vs_user_dir = $vs_tmp_directory."/userMedia{$vn_user_id}";
 		if(!file_exists($vs_user_dir)) {
-			mkdir($vs_user_dir);
+			@mkdir($vs_user_dir);
 		}
 		if (!($vn_timeout = (int)$this->request->config->get('ajax_media_upload_tmp_directory_timeout'))) {
 			$vn_timeout = 24 * 60 * 60;
