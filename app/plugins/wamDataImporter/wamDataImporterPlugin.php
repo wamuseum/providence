@@ -228,9 +228,10 @@ class wamDataImporterPlugin extends BaseApplicationPlugin {
 			$va_attr_vals_with_parent['parent_id'] = $vn_parent_id;
 			$va_attr_vals_with_parent['is_enabled'] = 1;
 			$vs_item_idno = caGetOption('idno', $va_attr_vals_with_parent, is_array($vm_value) ? null : $vm_value);
+			$va_match_on = caGetOption('matchOn', $pa_translation_settings, array('label', 'idno'), array('castTo' => 'array'));
 
 			$pa_options = array(
-				'matchOn' => array('label', 'idno'),
+				'matchOn' => $va_match_on,
 				'importEvent' => $o_import_event,
 				'importEventSource' => $pa_event_source,
 			);
