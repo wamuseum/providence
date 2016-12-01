@@ -215,6 +215,7 @@ final class ConfigurationExporter {
 		}
 
 		$va_exclude_lists = $this->opo_config->get('configuration_export_exclude_lists');
+		$va_exclude_list_items = $this->opo_config->get('configuration_export_exclude_list_items');
 
 		while($qr_lists->nextRow()) {
 			// skip excluded lists (in diff exports only)
@@ -251,7 +252,12 @@ final class ConfigurationExporter {
 
 			$vo_list->appendChild($vo_labels);
 
-			$vo_items = $this->getListItemsAsDOM($t_list->getRootItemIDForList($qr_lists->get("list_code")), $qr_lists->get('list_id'));
+			if(in_array($qr_lists->get('list_code'), $va_exclude_list_items)) {
+				$vo_items = null;
+			} else {
+				$vo_items = $this->getListItemsAsDOM($t_list->getRootItemIDForList($qr_lists->get("list_code")), $qr_lists->get('list_id'));
+			}
+
 
 
 			if($this->opn_modified_after) {
