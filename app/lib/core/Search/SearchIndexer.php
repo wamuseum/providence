@@ -40,7 +40,6 @@ require_once(__CA_LIB_DIR__.'/core/Utils/Timer.php');
 require_once(__CA_LIB_DIR__.'/core/Utils/CLIProgressBar.php');
 require_once(__CA_LIB_DIR__.'/core/Zend/Cache.php');
 require_once(__CA_APP_DIR__.'/helpers/utilityHelpers.php');
-require_once(__CA_MODELS_DIR__.'/ca_search_indexing_queue.php');
 
 class SearchIndexer extends SearchBase {
 	# ------------------------------------------------
@@ -67,6 +66,7 @@ class SearchIndexer extends SearchBase {
 	 */
 	public function __construct($opo_db=null, $ps_engine=null) {
 		require_once(__CA_MODELS_DIR__.'/ca_metadata_elements.php');
+		require_once(__CA_MODELS_DIR__.'/ca_search_indexing_queue.php');
 		parent::__construct($opo_db, $ps_engine);
 
 		$this->opo_metadata_element = new ca_metadata_elements();
